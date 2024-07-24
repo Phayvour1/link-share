@@ -1,21 +1,24 @@
+'use client';
+
 import React, { useState } from 'react';
 import Image from 'next/image';
 
 interface LinksProps {
   index: number;
   onRemove: (index: number) => void;
-  onPlatformChange: (platform: string) => void;
-  onLinkChange: (link: string) => void; // New prop for handling link change
+  onPlatformChange: (index: number, platform: string) => void;
+  onLinkChange: (index: number, link: string) => void;
 }
 
 export default function Links({ index, onRemove, onPlatformChange, onLinkChange }: LinksProps) {
   const [selectedOption, setSelectedOption] = useState('option1');
   const [placeholder, setPlaceholder] = useState('e.g. https://www.github.com/johnappleseed');
+  const [link, setLink] = useState('');
 
   const handleOptionChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
     const newOption = event.target.value;
     setSelectedOption(newOption);
-    onPlatformChange(newOption);
+    onPlatformChange(index, newOption);
     switch (newOption) {
       case 'option1':
         setPlaceholder('e.g. https://www.github.com/johnappleseed');
@@ -36,7 +39,8 @@ export default function Links({ index, onRemove, onPlatformChange, onLinkChange 
 
   const handleLinkChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const newLink = event.target.value;
-    onLinkChange(newLink); // Call the onLinkChange function with the new link value
+    setLink(newLink);
+    onLinkChange(index, newLink);
   };
 
   return (
@@ -62,18 +66,10 @@ export default function Links({ index, onRemove, onPlatformChange, onLinkChange 
           <option value="option3">Twitter</option>
           <option value="option4">Youtube</option>
         </select>
-<<<<<<< HEAD
-=======
-    
-        
->>>>>>> 04c5f29e05de7b8957b33481e968f1e7a3eb68cb
         <label className='text-[#333333] font-[400px] text-[12px] leading-[18px] mt-[12px] pb-[4px]'>Link</label>
         <input
           className='pt-[12px] pb-[12px] pl-[16px] pr-[16px] bg-[#FFFFFF] border-[1px] rounded-[8px]'
-          type='text'
-          placeholder={placeholder}
-          onChange={handleLinkChange} // Attach the handleLinkChange function
-        />
+          type='text' placeholder={placeholder} value={link} onChange={handleLinkChange}/>
         <Image 
           className='absolute top-[130px] pl-[17.75]'
           src='ph-link.svg' alt='link' width={16} height={16}/>
