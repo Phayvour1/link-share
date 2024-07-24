@@ -4,9 +4,12 @@ import NextAuth from "next-auth";
 import { signInWithEmailAndPassword } from "firebase/auth";
 import { auth } from '@/app/firebaseConfig'
 
+
+
+
 export const authOptions={
   pages:{
-    signIn: "./CreateAcct"
+    signIn: "/"
   },
   providers: [
     CredentialsProvider({
@@ -20,8 +23,8 @@ export const authOptions={
         .then(userCredential => {
       
           if(userCredential.user){
-            console.log(userCredential)
-            return userCredential.user.toJSON;
+           
+            return userCredential.user
           }
          
           return null;

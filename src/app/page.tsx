@@ -6,13 +6,29 @@ import { useState } from 'react';
 import { useRouter } from "next/navigation";
 //or next/router
 import { signIn } from "next-auth/react";
+import { signInWithEmailAndPassword } from "firebase/auth";
+import { auth } from './firebaseConfig';
 
 
 export default function Home() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  const router = useRouter();
+  const [error, setError] = useState<string | null>(null);
 
+
+  const router = useRouter();
+  const login = async () => {
+    setError(null);
+
+    try {
+      const userCredential = await signInWithEmailAndPassword(auth, email, password);
+      // Navigate to another page after successful login
+      router.push('/dashboard'); // Example: Redirect to dashboard after login
+    } catch (error: any) {
+      console.error('Error signing in:', error.message);
+      setError(error.message);
+    }
+  }
 
   return (
    
@@ -28,7 +44,9 @@ export default function Home() {
     <Link className="font-[700] text-[32px] text-[#333333]" href="./Homepage"><p>Login</p></Link>
     <p className="pt-[8px] pb-[40px] font-[400] text-[16px] leading-[24px] text-[#737373]">Add you details below to get back in the app</p>
    </div>
-   <form className="login-form flex flex-col relative">
+   <form 
+   onSubmit={(e) => e.preventDefault()}
+   className="login-form flex flex-col relative">
   
     <label className="pb-[4px] text-[#888888] font-[400px] text-[12px] ">Email address</label>
     <input
@@ -56,6 +74,7 @@ export default function Home() {
            onChange={(e) => setPassword(e.target.value)}
            autoComplete="current-password"
     />
+            {error && <p className="text-red-500">{error}</p>}
      <div  className="absolute top-[102px] pl -[17.5px]">
      <Image src="/passlock.svg" alt="logo" width={16} height={16}/>
 

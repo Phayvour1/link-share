@@ -20,7 +20,7 @@ export default function links() {
               <option value="option2" data-icon="fas fa-bicycle">Bicycle Option</option>
               <option value="option3" data-icon="fas fa-motorcycle">Motorcycle Option</option>
         </select>
-        <img/>
+    
         
         <label className='text-[#333333] font-[400px] text-[12px] leading-[18px] mt-[12px] pb-[4px]'>Link</label>
         <input

@@ -3,14 +3,15 @@
 
 import React from 'react'
 import Navbar from '../Components/Navbar'
-import Links from '../Components/Links'
 import Image from 'next/image'
+import Links from '../Components/Links'
 import { redirect } from "next/navigation";
 import { useSession } from "next-auth/react";
 
 
 
 export default function Homepage() {
+    
 
   {/* const session = useSession({
           required: true,
@@ -31,9 +32,10 @@ export default function Homepage() {
         <div className=' bg-[#FAFAFA]  mt-[24px] flex gap-x-[24px]'>
    
             <div className='flex bg-[white] justify-center items-center w-[560px]'>
-                <Image src="preview-section.svg" alt='subtract' width={307} height={631}/>
+                <Image src="mobile-preview.svg" alt='subtract' width={307} height={631}/>
            {/* */} </div>
-            <div className=' bg-[white] pt-[40px] pl-[40px] pr-[40px]'>
+            <div className=' bg-[white] pt-[40px] pl-[40px] pr-[40px]
+            flex-grow'>
                 <p className="font-[700] text-[32px] text-[#333333] leading-[48px] items-center">Customize you links{/*
                 {session?.data?.user?.email}
                 
