@@ -2,21 +2,52 @@
 
 import Image from "next/image";
 import Link  from "next/link";
-import { useState } from 'react';
+import { FormEvent, useState } from 'react';
 import firebase from "firebase/compat/app";
+import { redirect } from "next/navigation";
 import { useRouter } from "next/router";
 import { createUserWithEmailAndPassword } from "firebase/auth";
 import { auth } from '../firebaseConfig'
 import { signIn } from "next-auth/react";
 
+
 export default function CreateAcct() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [passwordAgain, setPasswordAgain] = useState('');
+  const [error, setError] = useState<string | null>(null)
 
-  const SignUp = () =>{
-    createUserWithEmailAndPassword(auth, email, password);
+  const signUp = async () =>{
+    setError(null);
+    if (password !== passwordAgain){
+      setError("Passwords do not match");
+      return;
+    }
+    try {
+      const userCredential = await createUserWithEmailAndPassword(auth, email, password);
+      // Navigate to another page after successful sign-up
+      redirect('/Homepage'); // Example: Redirect to dashboard after sign-up
+    } catch (error: any) {
+      console.error('Error signing up:', error.message);
+      setError(error.message);
+    }
+  
   }
+ // const handleSubmit = (e: FormEvent)=>{
+   // e.preventDefault() 
+ //   setError(null)
+  //  if (password !== passwordAgain){
+   //   setError("passwords do not match")
+  //    return;
+  //  }
+
+   // try{
+   //   const userCredential = await  createUserWithEmailAndPassword(auth, email, password);
+   // } catch{
+
+    //}
+
+  //}
   return (
     <main className=" h-[100vw] bg-[#FAFAFA] flex justify-center items-center flex-col ">
          <div className="logo-login-page p-[0px] flex gap-x-[4.17px] justify-center mb-[51px]">
@@ -31,7 +62,7 @@ export default function CreateAcct() {
             <p  className="font-[700] text-[32px] text-[#333333]"> Create account</p>
             <p className="pt-[8px] pb-[40px] font-[400] text-[16px] leading-[24px] text-[#737373]">Let’s get you started sharing your links!</p>
         </div>
-        <form className=" flex flex-col relative">
+        <form className=" flex flex-col relative" onSubmit={(e) => e.preventDefault()}>
         <label className="pb-[4px] text-[#888888] font-[400px] text-[12px] ">Email address</label>
     <input
           className=" p-[12px] pl-[24px] border-style border-[1px] rounded-[8px]  mb-[24px] "
@@ -67,17 +98,21 @@ export default function CreateAcct() {
     type="text" 
            id="password"
            placeholder="At least 8 characters"
-           value={password}
-           onChange={(e) => setPassword(e.target.value)}
+           value={passwordAgain}
+           onChange={(e) => setPasswordAgain(e.target.value)}
            autoComplete="current-password"
     />
+    
      <div  className="absolute top-[200px] pl -[17.5px]">
      <Image src="/passlock.svg" alt="logo" width={16} height={16}/>
 
     </div>
+    {error && <p className=" font-[400px] text-[12px] text-red-500">{error}</p>}
+    
             <p className=" pb-[4px] text-[#888888] font-[400px] text-[12px] ">Password must contain at least 8 characters</p>
+                
             <button 
-     className=" bg-[#633CFF] text-[#FFFFFF] font-[600px] text-[16px] leading-[24px] mt-[24px] mb-[24px] rounded-[8px] h-[46px]"onClick={SignUp}><p>Create an account</p></button>
+     className=" bg-[#633CFF] text-[#FFFFFF] font-[600px] text-[16px] leading-[24px] mt-[24px] mb-[24px] rounded-[8px] h-[46px]"onClick={signUp}><p>Create an account</p></button>
         </form>
         <div className="creat-acct-footer">
             <p className=" text-[#888888] font-[400px] text-[16px] leading-[24px]" >Dont have an account? 

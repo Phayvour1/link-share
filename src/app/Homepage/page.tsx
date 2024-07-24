@@ -1,5 +1,6 @@
 'use client'
 
+<<<<<<< HEAD
 import React, { useState } from 'react';
 import Navbar from '../Components/Navbar';
 import Links from '../Components/Links';
@@ -9,6 +10,20 @@ export default function Homepage() {
   const [links, setLinks] = useState<string[]>([]);
   const [platforms, setPlatforms] = useState<string[]>([]);
   const [linkURLs, setLinkURLs] = useState<string[]>([]);
+=======
+
+import React from 'react'
+import Navbar from '../Components/Navbar'
+import Image from 'next/image'
+import Links from '../Components/Links'
+import { redirect } from "next/navigation";
+import { useSession } from "next-auth/react";
+
+
+
+export default function Homepage() {
+    
+>>>>>>> 04c5f29e05de7b8957b33481e968f1e7a3eb68cb
 
   const handleAddLinkClick = () => {
     setLinks([...links, '']);
@@ -41,6 +56,7 @@ export default function Homepage() {
   };
 
   return (
+<<<<<<< HEAD
     <main className='bg-[#FAFAFA] mt-[24px] flex-col'>
       <Navbar/>
       <div className='bg-[#FAFAFA] mt-[24px] flex gap-x-[24px]'>
@@ -71,6 +87,41 @@ export default function Homepage() {
                   {platform === 'option4' && 'Youtube'}
                 </a>
               ))}
+=======
+    <main className=' bg-[#FAFAFA]  mt-[24px] flex-col'>
+             <Navbar/>
+       
+        <div className=' bg-[#FAFAFA]  mt-[24px] flex gap-x-[24px]'>
+   
+            <div className='flex bg-[white] justify-center items-center w-[560px]'>
+                <Image src="mobile-preview.svg" alt='subtract' width={307} height={631}/>
+           {/* */} </div>
+            <div className=' bg-[white] pt-[40px] pl-[40px] pr-[40px]
+            flex-grow'>
+                <p className="font-[700] text-[32px] text-[#333333] leading-[48px] items-center">Customize you links{/*
+                {session?.data?.user?.email}
+                
+                */}</p>
+                <p 
+                 className="font-[400] text-[16px] text-[#737373] leading-[24px] items-center mb-[40px]">Add/edit/remove links below and then share all your profiles with the world!</p>
+
+                <button className='border-[1px] rounded-[8px] w-[100%]  pt-[11px] pb-[11px] pr-[27px] pl-[27px] '>
+                    <p  className="font-[600] text-[16px] text-[#633CFF] leading-[24px] items-center">+ Add new link</p>
+                </button>
+                <div className='mt-[24px] flex flex-col items-center justify-center bg-[#FAFAFA] rounded-[12px] p-[20px]  hidden'>
+                    <Image src="started.svg" alt="started" width={249.53} height={160}/>
+                    <p className='mt-[40px] mb-[24px] font-[700] text-[32px] text-[#333333] leading-[48px] '>Lets get you started</p>
+                    <p className='font-[400] text-[16px] text-[#737373] leading-[24px] text-center'>Use the “Add new link” button to get started. Once you have more than one link, you can reorder and edit them. We’re here to help you share your profiles with everyone!</p>
+
+                  
+                </div>
+                <Links/>
+
+                <div className='border-t-[1px] mt-[40px] mb-[40px]  flex justify-end' >
+                <button className='opacity-25 bg-[#633CFF] pt-[11px] pb-[11px] pr-[27px] pl-[27px] rounded-[8px] mt-[24px]' ><p className='text-[white] text-center font-[600] text-[16px] leading-[24px] '>save</p></button>
+                </div>
+
+>>>>>>> 04c5f29e05de7b8957b33481e968f1e7a3eb68cb
             </div>
           </div>
         </div>

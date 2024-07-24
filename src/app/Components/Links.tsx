@@ -62,6 +62,11 @@ export default function Links({ index, onRemove, onPlatformChange, onLinkChange 
           <option value="option3">Twitter</option>
           <option value="option4">Youtube</option>
         </select>
+<<<<<<< HEAD
+=======
+    
+        
+>>>>>>> 04c5f29e05de7b8957b33481e968f1e7a3eb68cb
         <label className='text-[#333333] font-[400px] text-[12px] leading-[18px] mt-[12px] pb-[4px]'>Link</label>
         <input
           className='pt-[12px] pb-[12px] pl-[16px] pr-[16px] bg-[#FFFFFF] border-[1px] rounded-[8px]'
