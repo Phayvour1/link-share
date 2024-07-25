@@ -1,20 +1,15 @@
-import { initializeApp, getApp, getApps } from "firebase/app";
-import { getAuth } from 'firebase/auth';
-import { getFirestore } from "firebase/firestore";
-import { getStorage } from "firebase/storage";
 
+import { initializeApp } from "firebase/app";
+import { getAnalytics } from "firebase/analytics";
 const firebaseConfig = {
-  apiKey: process.env.NEXT_PUBLIC_FIREBASE_API_KEY,
-  authDomain: "hng-4-file-sharing.firebaseapp.com",
-  projectId: "hng-4-file-sharing",
-  storageBucket: "hng-4-file-sharing.appspot.com",
-  messagingSenderId: process.env.NEXT_PUBLIC_FIREBASE_SENDER_ID,
-  appId: process.env.NEXT_PUBLIC_FIREBASE_APP_ID
+  apiKey: "AIzaSyC6_GI1RWIbtE01MRjNA5W_l3hcRC6lc_s",
+  authDomain: "link-sharing-92111.firebaseapp.com",
+  projectId: "link-sharing-92111",
+  storageBucket: "link-sharing-92111.appspot.com",
+  messagingSenderId: "128932580025",
+  appId: "1:128932580025:web:3e7f7d7602ad1a1a182968",
+  measurementId: "G-WNE5KDQF3E"
 };
 
-// Initialize Firebase
-const app = getApps.length ? getApp():initializeApp(firebaseConfig);
-const auth = getAuth();
-const storage = getStorage(app)
-const firestore = getFirestore(app)
-export {app, auth, firestore, storage } 
+const app = initializeApp(firebaseConfig);
+const analytics = getAnalytics(app);

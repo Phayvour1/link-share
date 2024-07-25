@@ -1,5 +1,3 @@
-'use client';
-
 import React, { useState } from 'react';
 import Image from 'next/image';
 
@@ -13,7 +11,6 @@ interface LinksProps {
 export default function Links({ index, onRemove, onPlatformChange, onLinkChange }: LinksProps) {
   const [selectedOption, setSelectedOption] = useState('option1');
   const [placeholder, setPlaceholder] = useState('e.g. https://www.github.com/johnappleseed');
-  const [link, setLink] = useState('');
 
   const handleOptionChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
     const newOption = event.target.value;
@@ -39,7 +36,6 @@ export default function Links({ index, onRemove, onPlatformChange, onLinkChange 
 
   const handleLinkChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const newLink = event.target.value;
-    setLink(newLink);
     onLinkChange(index, newLink);
   };
 
@@ -69,7 +65,7 @@ export default function Links({ index, onRemove, onPlatformChange, onLinkChange 
         <label className='text-[#333333] font-[400px] text-[12px] leading-[18px] mt-[12px] pb-[4px]'>Link</label>
         <input
           className='pt-[12px] pb-[12px] pl-[16px] pr-[16px] bg-[#FFFFFF] border-[1px] rounded-[8px]'
-          type='text' placeholder={placeholder} value={link} onChange={handleLinkChange}/>
+          type='text' placeholder={placeholder} onChange={handleLinkChange}/>
         <Image 
           className='absolute top-[130px] pl-[17.75]'
           src='ph-link.svg' alt='link' width={16} height={16}/>

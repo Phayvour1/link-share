@@ -34,12 +34,6 @@ export default function Homepage() {
     setLinkURLs(newLinkURLs);
   };
 
-  const handleSave = () => {
-    // Implement save functionality here
-    console.log("Links:", linkURLs);
-    console.log("Platforms:", platforms);
-  };
-
   return (
     <main className='bg-[#FAFAFA] mt-[24px] flex-col'>
       <Navbar/>
@@ -84,39 +78,19 @@ export default function Homepage() {
             className='border-[1px] rounded-[8px] w-[100%] pt-[11px] pb-[11px] pr-[27px] pl-[27px]'
             onClick={handleAddLinkClick}
           >
-            <p className="font-[600] text-[16px] text-[#633CFF] leading-[24px] items-center">+ Add new link</p>
+            <p className="font-[600] text-[16px] text-[#633CFF]">Add Link</p>
           </button>
-          {links.length === 0 && (
-            <div className='mt-[24px] flex flex-col items-center justify-center bg-[#FAFAFA] rounded-[12px] p-[20px]'>
-              <Image src="/started.svg" alt="started" width={249.53} height={160}/>
-              <p className='mt-[40px] mb-[24px] font-[700] text-[32px] text-[#333333] leading-[48px]'>Lets get you started</p>
-              <p className='font-[400] text-[16px] text-[#737373] leading-[24px] text-center'>
-                Use the “Add new link” button to get started. Once you have more than one link, you can reorder and edit them. We’re here to help you share your profiles with everyone!
-              </p>
-            </div>
-          )}
-          {links.map((link, index) => (
-            <Links 
-              key={index} 
-              index={index} 
-              onRemove={handleRemoveLink} 
-              onPlatformChange={(platform) => handlePlatformChange(index, platform)} 
-              onLinkChange={(link) => handleLinkChange(index, link)}
+          {links.map((_, index) => (
+            <Links
+              key={index}
+              index={index}
+              onRemove={handleRemoveLink}
+              onPlatformChange={handlePlatformChange}
+              onLinkChange={handleLinkChange}
             />
           ))}
-          <div className='border-t-[1px] mt-[40px] mb-[40px] flex justify-end'>
-            <button 
-              className='opacity-25 bg-[#633CFF] pt-[11px] pb-[11px] pr-[27px] pl-[27px] rounded-[8px] mt-[24px]'
-              onClick={handleSave}
-            >
-              <p className='text-[white] text-center font-[600] text-[16px] leading-[24px]'>Save</p>
-            </button>
-          </div>
         </div>
       </div>
     </main>
   );
 }
-
-Homepage.requireAuth = true;
-
